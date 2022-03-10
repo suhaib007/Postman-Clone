@@ -1,35 +1,35 @@
 console.log("POSTMAN CLONE");
 
-// Utility functions:
-// 1. Utility function to get DOM element from string
+//* Utility functions:
+//** 1. Utility function to get DOM element from string
 function getElementFromString(string) {
     let div = document.createElement("div");
     div.innerHTML = string;
     return div.firstElementChild;
 }
 
-// Initialize no of parameters
+//* Initialize no of parameters
 let addedParamCount = 0;
 
-// Hide the parameters box initially
+//* Hide the parameters box initially
 let parametersBox = document.getElementById("parametersBox");
 parametersBox.style.display = "none";
 
-// If the user clicks on params box, hide the json box
+//* If the user clicks on params box, hide the json box
 let paramsRadio = document.getElementById("paramsRadio");
 paramsRadio.addEventListener("click", () => {
     document.getElementById("requestJsonBox").style.display = "none";
     document.getElementById("parametersBox").style.display = "block";
 });
 
-// If the user clicks on json box, hide the params box
+//* If the user clicks on json box, hide the params box
 let jsonRadio = document.getElementById("jsonRadio");
 jsonRadio.addEventListener("click", () => {
     document.getElementById("requestJsonBox").style.display = "block";
     document.getElementById("parametersBox").style.display = "none";
 });
 
-// If the user clicks on + button, add more parameters
+//* If the user clicks on + button, add more parameters
 let addParam = document.getElementById("addParam");
 addParam.addEventListener("click", () => {
     let params = document.getElementById("params");
@@ -53,7 +53,7 @@ addParam.addEventListener("click", () => {
                     </div>
                     <button class="btn btn-primary deleteParam"> - </button>
                     </div>`;
-    // Convert the element string to DOM node
+    //** Convert the element string to DOM node
     let paramElement = getElementFromString(string);
     params.appendChild(paramElement);
     // Add an event listener to remove the parameter on clicking - button
@@ -67,15 +67,15 @@ addParam.addEventListener("click", () => {
     addedParamCount++;
 });
 
-// If the user clicks on submit button
+//* If the user clicks on submit button
 let submit = document.getElementById("submit");
 submit.addEventListener("click", () => {
-    // Show please wait in the response box to request patience from the user
+    //** Show please wait in the response box to request patience from the user
     // document.getElementById('responseJsonText').value = "Please wait.. Fetching response...";
     document.getElementById("responsePrism").innerHTML =
         "Please wait.. Fetching response...";
 
-    // Fetch all the values user has entered
+    //** Fetch all the values user has entered
     let url = document.getElementById("url").value;
     let requestType = document.querySelector(
         "input[name='requestType']:checked"
@@ -84,7 +84,7 @@ submit.addEventListener("click", () => {
         "input[name='contentType']:checked"
     ).value;
 
-    // If user has used params option instead of json, collect all the parameters in an object
+    //** If user has used params option instead of json, collect all the parameters in an object
     if (contentType == "params") {
         data = {};
         for (let i = 0; i < addedParamCount + 1; i++) {
@@ -105,13 +105,13 @@ submit.addEventListener("click", () => {
         data = document.getElementById("requestJsonText").value;
     }
 
-    // Log all the values in the console for debugging
+    //** Log all the values in the console for debugging
     console.log("URL is ", url);
     console.log("requestType is ", requestType);
     console.log("contentType is ", contentType);
     console.log("data is ", data);
 
-    // if the request type is get, invoke fetch api to create a post request
+    //** if the request type is get, invoke fetch api to create a post request
     if (requestType == "GET") {
         fetch(url, {
             method: "GET",
